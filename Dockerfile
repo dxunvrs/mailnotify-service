@@ -9,8 +9,4 @@ WORKDIR /app
 
 COPY --from=builder /build/build/libs/mailnotify-service-1.0.jar app.jar
 
-ENV SERVER_PORT=25000
-
-EXPOSE 25000
-
 ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -3,8 +3,6 @@ services:
     image: redis:7-alpine
     container_name: mailnotify-redis
     restart: always
-    ports:
-      - ":6379"
     volumes:
       - redis_data:/data
 
@@ -12,8 +10,6 @@ services:
     container_name: mailnotify-service
     build: .
     restart: on-failure
-    ports:
-      - ":25000"
     env_file:
       - .env
     depends_on:
