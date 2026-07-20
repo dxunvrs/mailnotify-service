@@ -4,6 +4,7 @@ import com.dxunvrs.mailnotify_service.dto.MailDto;
 import jakarta.mail.Multipart;
 import jakarta.mail.Part;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeUtility;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.integration.transformer.AbstractTransformer;
 import org.springframework.messaging.Message;
@@ -19,7 +20,7 @@ public class MailTransformer extends AbstractTransformer {
             String messageId = mimeMessage.getMessageID();
             String subject = "Без темы";
             if (mimeMessage.getSubject() != null) subject = mimeMessage.getSubject();
-            String from = mimeMessage.getFrom()[0].toString();
+            String from = MimeUtility.decodeText(mimeMessage.getFrom()[0].toString());
             int attachments = countAttachments(mimeMessage);
 
             return new MailDto(messageId, subject, from, attachments);
