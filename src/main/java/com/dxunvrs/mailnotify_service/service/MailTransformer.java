@@ -4,6 +4,7 @@ import com.dxunvrs.mailnotify_service.dto.MailDto;
 import jakarta.mail.Multipart;
 import jakarta.mail.Part;
 import jakarta.mail.internet.MimeMessage;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.integration.transformer.AbstractTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailTransformer extends AbstractTransformer {
     @Override
+    @NullMarked
     protected Object doTransform(Message<?> message) {
         MimeMessage mimeMessage = (MimeMessage) message.getPayload();
         try {
@@ -41,6 +43,7 @@ public class MailTransformer extends AbstractTransformer {
     }
 
     @Override
+    @NullMarked
     public String getComponentType() {
         return MailDto.class.getTypeName();
     }
